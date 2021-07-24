@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "Car.h"
 #import "CarModel.h"
+#import "Bicycle.h"
 
 #define PI 3.14159
 #define RAD_TO_DEG(radians) (radians * (180.0 / PI))
@@ -251,7 +252,24 @@ int main(int argc, const char * argv[]) {
         // 2⃣️ 冒号也是方法名的一部分，method和method:是两个不同的方法名，不是
         // overload，第二个带参数。
         
+        // Protocol practice
+        Bicycle *bike = [[Bicycle alloc] init];
+        [bike startPedaling];
+        [bike signalLeftTurn];
+        [bike signalStop];
+        [bike lockToStructure:nil];
         
+        id <StreetLegal> mysteryVehicle = (id)[[Car alloc] init];
+        if ([mysteryVehicle conformsToProtocol:@protocol(StreetLegal)]) {
+            [mysteryVehicle signalLeftTurn];
+        }
+        
+        mysteryVehicle = [[Bicycle alloc] init];
+        if ([mysteryVehicle conformsToProtocol:@protocol(StreetLegal)]) {
+            [mysteryVehicle signalStop];
+            [mysteryVehicle signalLeftTurn];
+            [mysteryVehicle signalRightTurn];
+        }
     }
     return 0;
 }

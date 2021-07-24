@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F32D753526AC02DB003B25CB /* Bicycle.m in Sources */ = {isa = PBXBuildFile; fileRef = F32D753426AC02DB003B25CB /* Bicycle.m */; };
 		F3A5B4082693F39300EC2077 /* Car.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A5B4072693F39300EC2077 /* Car.m */; };
 		F3B16889269561E600F9DD7B /* CarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B16888269561E600F9DD7B /* CarModel.m */; };
 		F3B609D02693082F00746255 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B609CF2693082F00746255 /* main.m */; };
@@ -26,6 +27,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F32D753226AC011E003B25CB /* StreetLegal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StreetLegal.h; sourceTree = "<group>"; };
+		F32D753426AC02DB003B25CB /* Bicycle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bicycle.m; sourceTree = "<group>"; };
+		F32D753626AC0327003B25CB /* Bicycle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bicycle.h; sourceTree = "<group>"; };
 		F3A5B4062693F39300EC2077 /* Car.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Car.h; sourceTree = "<group>"; };
 		F3A5B4072693F39300EC2077 /* Car.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Car.m; sourceTree = "<group>"; };
 		F3B16887269561E600F9DD7B /* CarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CarModel.h; sourceTree = "<group>"; };
@@ -46,6 +50,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F32D753126AC0076003B25CB /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				F32D753226AC011E003B25CB /* StreetLegal.h */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		F32D753726AC0730003B25CB /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				F3B16887269561E600F9DD7B /* CarModel.h */,
+				F3B16888269561E600F9DD7B /* CarModel.m */,
+				F3A5B4062693F39300EC2077 /* Car.h */,
+				F3A5B4072693F39300EC2077 /* Car.m */,
+				F32D753426AC02DB003B25CB /* Bicycle.m */,
+				F32D753626AC0327003B25CB /* Bicycle.h */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
 		F3B609C32693082F00746255 = {
 			isa = PBXGroup;
 			children = (
@@ -65,12 +90,10 @@
 		F3B609CE2693082F00746255 /* HelloObjectiveC */ = {
 			isa = PBXGroup;
 			children = (
+				F32D753726AC0730003B25CB /* Entities */,
+				F32D753126AC0076003B25CB /* Protocols */,
 				F3B609CF2693082F00746255 /* main.m */,
 				F3B609D6269330D200746255 /* function.m */,
-				F3A5B4062693F39300EC2077 /* Car.h */,
-				F3A5B4072693F39300EC2077 /* Car.m */,
-				F3B16887269561E600F9DD7B /* CarModel.h */,
-				F3B16888269561E600F9DD7B /* CarModel.m */,
 			);
 			path = HelloObjectiveC;
 			sourceTree = "<group>";
@@ -134,6 +157,7 @@
 				F3B16889269561E600F9DD7B /* CarModel.m in Sources */,
 				F3A5B4082693F39300EC2077 /* Car.m in Sources */,
 				F3B609D02693082F00746255 /* main.m in Sources */,
+				F32D753526AC02DB003B25CB /* Bicycle.m in Sources */,
 				F3B609D7269330D200746255 /* function.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
