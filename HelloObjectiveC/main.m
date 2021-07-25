@@ -12,6 +12,7 @@
 #import "Motorbike.h"
 #import "Motorbike+Maintenance.h"
 #import "Coupe.h"
+#import "CarStore.h"
 
 #define PI 3.14159
 #define RAD_TO_DEG(radians) (radians * (180.0 / PI))
@@ -388,6 +389,24 @@ int main(int argc, const char * argv[]) {
         } else {
             // Handle the error
         }
+        
+        // memory management practice
+        
+        // 实例化一个可变数组
+        NSMutableArray *inventoryArray = [[NSMutableArray alloc] init];
+        [inventoryArray addObject:@"Honda Civic"];
+        NSLog(@"%@", inventoryArray);
+        // release 需要在非自动计数模式下调用
+        //[inventoryArray release];
+        
+        CarStore *superstore = [[CarStore alloc] init];
+        [superstore setInventory:inventoryArray];
+        //[inventory release];
+        
+        // Do some other stuff...
+        
+        // Try to access the property later on (error!)
+        NSLog(@"%@", [superstore inventory]);
     }
     return 0;
 }
