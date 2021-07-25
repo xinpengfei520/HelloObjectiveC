@@ -15,9 +15,10 @@ static NSString *_defaultModel;
 
 @implementation Car {
     // Private instance variables
-    double _odometer;
+    // double _odometer;
 }
 
+@synthesize odometer = _odometer;
 @synthesize model = _model;    // Optional for Xcode 4.4+
 @synthesize running = _running;    // Optional for Xcode 4.4+
 
@@ -74,6 +75,15 @@ static NSString *_defaultModel;
 - (BOOL)engineIsWorking {
     // In the real world, this would probably return a useful value
     return YES;
+}
+
+- (void)driveForDuration:(double)duration
+       withVariableSpeed:(double (^)(double time))speedFunction
+                   steps:(int)numSteps {
+    double dt = duration / numSteps;
+    for (int i=1; i<=numSteps; i++) {
+        _odometer += speedFunction(i*dt) * dt;
+    }
 }
 
 @end

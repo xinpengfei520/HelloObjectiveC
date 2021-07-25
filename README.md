@@ -138,11 +138,104 @@ Objective-C 方法通过用介词描述参数来明确说明这一点。得到�
 
 ## 9. Blocks
 
+块是 Objective-C 的匿名函数。它们让您可以像传递数据一样在对象之间传递任意语句，这通常比引用其他地方定义的函数更直观。此外，块被实现为*闭包*，使得捕获周围状态变得微不足道。
 
+块提供与 C 函数大致相同的功能，但它们使用起来更加直观（在您习惯了语法之后）。它们可以被内联定义的事实使得在方法调用中使用它们变得容易，并且由于它们是闭包，因此可以毫不费力地捕获周围变量的值。
+
+符号 ( `^`) 用于将`distanceFromRateAndTime`变量标记 为块。与函数声明一样，您需要包含返回类型和参数类型，以便编译器可以强制执行类型安全。的`^`行为方式与指针（例如，`int *aPointer`）前的星号类似，因为只有在*声明*块时才需要它，之后您可以像普通变量一样使用它。
+
+块本身本质上是一个函数定义——没有函数名。所述`^double(double rate, double time)`签名开始一个块字面一个返回`double`，并且具有两个参数也双打（返回类型如果需要，可以省略）。任意语句可以放在花括号 ( `{}`) 内，就像普通函数一样。
+
+在将块文字分配给 `distanceFromRateAndTime`变量后，我们可以像*调用*函数一样*调用*该变量。
+
+如果块不带任何参数，则可以完全省略参数列表。同样，指定块文字的返回类型始终是可选的，因此您可以将符号缩短为`^ { ... }`：
+
+```objective-c
+double (^randomPercent)(void) = ^ {
+    return (double)arc4random() / 4294967295;
+};
+NSLog(@"Gas tank is %.1f%% full", randomPercent() * 100);
+```
+
+内置[`arc4random()`](http://web.archive.org/web/20160408000822/https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man3/arc4random.3.html) 函数返回一个随机的 32 位整数。通过除以`arc4random()`( `4294967295`)的最大可能值，我们得到`0`和之间的十进制值`1`。
+
+到目前为止，看起来块只是定义函数的一种复杂方式。但是，它们作为*闭包*实现的事实 为令人兴奋的新编程机会打开了大门。
 
 ## 10. Exceptions
 
+异常代表程序员级别的错误，例如尝试访问不存在的数组元素。它们旨在通知开发人员发生了*意外*情况。
 
+错误是用户级别的问题，例如尝试加载不存在的文件。由于被错误*预期* 程序的正常执行过程中，应手动检查这些种类的条件和它们发生时通知用户。
+
+![img](http://image.x-sir.com/exceptions-vs-errors.png)
+
+异常由[`NSException`](http://web.archive.org/web/20160408041837/https://developer.apple.com/library/mac/#documentation/Cocoa/Reference/Foundation/Classes/NSException_Class/Reference/Reference.html) 类表示。它被设计为封装异常数据的通用方法，因此您应该很少需要对其进行子类化或以其他方式定义自定义异常对象。`NSException`下面列出了 的三个主要属性。
+
+| 财产       | 描述                                                         |
+| :--------- | :----------------------------------------------------------- |
+| `name`     | 一个`NSString`唯一标识例外。                                 |
+| `reason`   | 一个`NSString`包含对异常的人类可读的描述。                   |
+| `userInfo` | 一个`NSDictionary`其键-值对包含有关异常的额外信息。这因异常类型而异。 |
+
+### 处理异常
+
+将任何*可能*导致异常的代码放入`@try`块中。然后，如果抛出异常，`@catch()`则执行相应的块来处理问题。该`@finally`块被称为后，无论是否发生异常。
+
+```objective-c
+				NSArray *inventory = @[@"Honda Civic",
+                               @"Nissan Versa",
+                               @"Ford F-150"];
+        int selectedIndex = 3;
+        @try {
+            NSString *car = inventory[selectedIndex];
+            NSLog(@"The selected car is: %@", car);
+        } @catch(NSException *theException) {
+            NSLog(@"An exception occurred: %@", theException.name);
+            NSLog(@"Here are some details: %@", theException.reason);
+        } @finally {
+            NSLog(@"Executing finally block");
+        }
+```
+
+未捕获异常的默认行为是向控制台输出消息并退出程序。
+
+Objective-C 的异常处理能力并不是最有效的，所以你应该只使用`@try`/`@catch()` 块来测试真正的异常情况。不要*不*到位的普通控制流程的工具使用。相反，使用标准`if`语句检查可预测的条件。
+
+这意味着上面的代码片段实际上是非常糟糕的异常使用。更好的方法`selectedIndex`是确保 比 `[inventory count]`使用传统比较小：
+
+```objective-c
+if (selectedIndex < [inventory count]) {
+    NSString *car = inventory[selectedIndex];
+    NSLog(@"The selected car is: %@", car);
+} else {
+    // Handle the error
+}
+```
+
+#### 内置异常:
+
+| 异常名称                           | 描述                                   |
+| :--------------------------------- | :------------------------------------- |
+| `NSRangeException`                 | 当您尝试访问集合边界之外的元素时发生。 |
+| `NSInvalidArgumentException`       | 在将无效参数传递给方法时发生。         |
+| `NSInternalInconsistencyException` | 当内部出现意外情况时发生。             |
+| `NSGenericException`               | 当您不知道还有什么可以调用异常时发生。 |
+
+请注意，这些值是*字符串*，而不是`NSException` 子类。因此，当您寻找特定类型的异常时，您需要检查该`name`属性，如下所示：
+
+```objective-c
+...
+} @catch(NSException *theException) {
+    if (theException.name == NSRangeException) {
+        NSLog(@"Caught an NSRangeException");
+    } else {
+        NSLog(@"Ignored a %@ exception", theException);
+        @throw;
+    }
+} ...
+```
+
+`@throw`指令重新引发捕获的异常。我们在上面的代码片段中使用它来忽略所有我们不想要的异常，将它扔到下一个最高 `@try`块。
 
 ## 11. Memory Management
 

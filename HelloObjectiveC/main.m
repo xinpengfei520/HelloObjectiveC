@@ -302,6 +302,92 @@ int main(int argc, const char * argv[]) {
             // This *will* work
             [porsche performSelector:protectedMethod];
         }
+        
+        // Declare the block variable
+        double (^distanceFromRateAndTime)(double rate, double time);
+        // Create and assign the block
+        distanceFromRateAndTime = ^double(double rate, double time) {
+            return rate * time;
+        };
+        // Call the block
+        double dx = distanceFromRateAndTime(35, 1.5);
+        
+        NSLog(@"A car driving 35 mph will travel "
+              @"%.2f miles in 1.5 hours.", dx);
+        
+        double (^randomPercent)(void) = ^ {
+            return (double)arc4random() / 4294967295;
+        };
+        NSLog(@"Gas tank is %.1f%% full",
+              randomPercent() * 100);
+        
+        NSString *make = @"Honda";
+        NSString *(^getFullCarName)(NSString *) = ^(NSString *model) {
+            return [make stringByAppendingFormat:@" %@", model];
+        };
+        NSLog(@"%@", getFullCarName(@"Accord"));    // Honda Accord
+        
+        // Try changing the non-local variable (it won't change the block)
+        make = @"Porsche";
+        NSLog(@"%@", getFullCarName(@"911 Turbo")); // Honda 911 Turbo
+        
+        // 告诉块通过引用捕获变量，make在块外的变量和块内的变量之间创建直接链接。
+        // 您现在可以make从块外部分配一个新值，它会反映在块中，反之亦然。
+        __block NSString *making = @"Honda";
+        NSLog(@"%@",making);
+        
+        __block int index = 0;
+        int (^count)(void) = ^ {
+            index += 1;
+            return index;
+        };
+        NSLog(@"%d", count());    // 1
+        NSLog(@"%d", count());    // 2
+        NSLog(@"%d", count());    // 3
+        
+        Car *theCar = [[Car alloc] init];
+                
+        // Drive for awhile with constant speed of 5.0 m/s
+        [theCar driveForDuration:10.0
+               withVariableSpeed:^(double time) {
+            return 5.0;
+        } steps:100];
+        NSLog(@"The car has now driven %.2f meters", theCar.odometer);
+        
+        // Start accelerating at a rate of 1.0 m/s^2
+        [theCar driveForDuration:10.0
+               withVariableSpeed:^(double time) {
+            return time + 5.0;
+        } steps:100];
+        NSLog(@"The car has now driven %.2f meters", theCar.odometer);
+        
+        NSArray *inventory = @[@"Honda Civic",
+                               @"Nissan Versa",
+                               @"Ford F-150"];
+        int selectedIndex = 3;
+//        @try {
+//            NSString *car = inventory[selectedIndex];
+//            NSLog(@"The selected car is: %@", car);
+//        } @catch(NSException *theException) {
+//            if (theException.name == NSRangeException) {
+//                NSLog(@"Caught an NSRangeException");
+//                NSLog(@"An exception occurred: %@", theException.name);
+//                NSLog(@"Here are some details: %@", theException.reason);
+//            } else {
+//                NSLog(@"Ignored a %@ exception", theException);
+//                @throw;
+//            }
+//        } @finally {
+//            NSLog(@"Executing finally block");
+//        }
+        
+        // the best deal with:
+        if (selectedIndex < [inventory count]) {
+            NSString *car = inventory[selectedIndex];
+            NSLog(@"The selected car is: %@", car);
+        } else {
+            // Handle the error
+        }
     }
     return 0;
 }

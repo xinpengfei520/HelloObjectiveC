@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Car ()
 
-@property (readwrite) double odometer;
+//@property (readwrite) double odometer;
 
 - (BOOL)engineIsWorking;
 

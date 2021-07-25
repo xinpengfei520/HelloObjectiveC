@@ -9,12 +9,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Car : NSObject {
-    // Protected instance variables (not recommended)
-}
+// Define a new type for the block
+typedef double (^SpeedFunction)(double);
 
+@interface Car : NSObject
+
+@property double odometer;
 @property (copy) NSString *model;
-
 @property BOOL running;
 
 - (void)drive;
@@ -28,6 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (id)initWithModel:(NSString *)aModel;
 
 - (void)startEngine;
+
+- (void)driveForDuration:(double)duration
+       withVariableSpeed:(double (^)(double time))speedFunction
+                   steps:(int)numSteps;
 
 @end
 
