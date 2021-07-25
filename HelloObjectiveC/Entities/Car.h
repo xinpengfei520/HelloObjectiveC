@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (id)initWithModel:(NSString *)aModel;
 
+- (void)startEngine;
+
 @end
 
 NS_ASSUME_NONNULL_END

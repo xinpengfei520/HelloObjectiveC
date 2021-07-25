@@ -6,6 +6,8 @@
 //
 
 #import "Car.h"
+#import "Car+Protected.h"
+#import "Car+__.h"
 
 // 虽然从技术上讲，Objective-C 中没有类级变量这样的东西，
 // 但您可以通过static在定义实现之前声明一个变量来模拟一个
@@ -20,6 +22,8 @@ static NSString *_defaultModel;
 @synthesize running = _running;    // Optional for Xcode 4.4+
 
 - (void)drive {
+    // 调用的是受保护类中的方法
+    [self prepareToDrive];
     NSLog(@"Driving a %@. Vrooooom!", self.model);
 }
 
@@ -61,6 +65,15 @@ static NSString *_defaultModel;
         // Makes sure this isn't executed more than once
         _defaultModel = @"Nissan Versa";
     }
+}
+
+- (void)startEngine {
+    NSLog(@"Starting the %@'s engine", _model);
+}
+
+- (BOOL)engineIsWorking {
+    // In the real world, this would probably return a useful value
+    return YES;
 }
 
 @end

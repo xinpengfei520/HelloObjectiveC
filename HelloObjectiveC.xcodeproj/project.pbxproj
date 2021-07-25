@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F30179B226AD88D5003EC6B6 /* Motorbike.m in Sources */ = {isa = PBXBuildFile; fileRef = F30179B126AD88D5003EC6B6 /* Motorbike.m */; };
+		F30179B826AD8AEF003EC6B6 /* Motorbike+Maintenance.m in Sources */ = {isa = PBXBuildFile; fileRef = F30179B726AD8AEF003EC6B6 /* Motorbike+Maintenance.m */; };
+		F30179BB26AD93BE003EC6B6 /* Car+Protected.m in Sources */ = {isa = PBXBuildFile; fileRef = F30179BA26AD93BE003EC6B6 /* Car+Protected.m */; };
+		F30179BE26AD9567003EC6B6 /* Coupe.m in Sources */ = {isa = PBXBuildFile; fileRef = F30179BD26AD9567003EC6B6 /* Coupe.m */; };
 		F32D753526AC02DB003B25CB /* Bicycle.m in Sources */ = {isa = PBXBuildFile; fileRef = F32D753426AC02DB003B25CB /* Bicycle.m */; };
 		F3A5B4082693F39300EC2077 /* Car.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A5B4072693F39300EC2077 /* Car.m */; };
 		F3B16889269561E600F9DD7B /* CarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B16888269561E600F9DD7B /* CarModel.m */; };
@@ -27,6 +31,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F30179B026AD885A003EC6B6 /* Motorbike.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Motorbike.h; sourceTree = "<group>"; };
+		F30179B126AD88D5003EC6B6 /* Motorbike.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Motorbike.m; sourceTree = "<group>"; };
+		F30179B626AD8AEF003EC6B6 /* Motorbike+Maintenance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Motorbike+Maintenance.h"; sourceTree = "<group>"; };
+		F30179B726AD8AEF003EC6B6 /* Motorbike+Maintenance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Motorbike+Maintenance.m"; sourceTree = "<group>"; };
+		F30179B926AD93BE003EC6B6 /* Car+Protected.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Car+Protected.h"; sourceTree = "<group>"; };
+		F30179BA26AD93BE003EC6B6 /* Car+Protected.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Car+Protected.m"; sourceTree = "<group>"; };
+		F30179BC26AD951E003EC6B6 /* Coupe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Coupe.h; sourceTree = "<group>"; };
+		F30179BD26AD9567003EC6B6 /* Coupe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Coupe.m; sourceTree = "<group>"; };
+		F30179BF26AD992F003EC6B6 /* Car+__.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Car+__.h"; sourceTree = "<group>"; };
 		F32D753226AC011E003B25CB /* StreetLegal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StreetLegal.h; sourceTree = "<group>"; };
 		F32D753426AC02DB003B25CB /* Bicycle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bicycle.m; sourceTree = "<group>"; };
 		F32D753626AC0327003B25CB /* Bicycle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bicycle.h; sourceTree = "<group>"; };
@@ -50,6 +63,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F30179AD26AD12DE003EC6B6 /* Functions */ = {
+			isa = PBXGroup;
+			children = (
+				F3B609D6269330D200746255 /* function.m */,
+			);
+			path = Functions;
+			sourceTree = "<group>";
+		};
+		F30179AE26AD1317003EC6B6 /* Properties */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Properties;
+			sourceTree = "<group>";
+		};
+		F30179AF26AD880E003EC6B6 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				F30179B026AD885A003EC6B6 /* Motorbike.h */,
+				F30179B126AD88D5003EC6B6 /* Motorbike.m */,
+				F30179B626AD8AEF003EC6B6 /* Motorbike+Maintenance.h */,
+				F30179B726AD8AEF003EC6B6 /* Motorbike+Maintenance.m */,
+				F30179B926AD93BE003EC6B6 /* Car+Protected.h */,
+				F30179BA26AD93BE003EC6B6 /* Car+Protected.m */,
+				F30179BC26AD951E003EC6B6 /* Coupe.h */,
+				F30179BD26AD9567003EC6B6 /* Coupe.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 		F32D753126AC0076003B25CB /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -67,6 +110,7 @@
 				F3A5B4072693F39300EC2077 /* Car.m */,
 				F32D753426AC02DB003B25CB /* Bicycle.m */,
 				F32D753626AC0327003B25CB /* Bicycle.h */,
+				F30179BF26AD992F003EC6B6 /* Car+__.h */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -90,10 +134,12 @@
 		F3B609CE2693082F00746255 /* HelloObjectiveC */ = {
 			isa = PBXGroup;
 			children = (
+				F30179AF26AD880E003EC6B6 /* Categories */,
+				F30179AE26AD1317003EC6B6 /* Properties */,
+				F30179AD26AD12DE003EC6B6 /* Functions */,
 				F32D753726AC0730003B25CB /* Entities */,
 				F32D753126AC0076003B25CB /* Protocols */,
 				F3B609CF2693082F00746255 /* main.m */,
-				F3B609D6269330D200746255 /* function.m */,
 			);
 			path = HelloObjectiveC;
 			sourceTree = "<group>";
@@ -155,9 +201,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3B16889269561E600F9DD7B /* CarModel.m in Sources */,
+				F30179B826AD8AEF003EC6B6 /* Motorbike+Maintenance.m in Sources */,
 				F3A5B4082693F39300EC2077 /* Car.m in Sources */,
 				F3B609D02693082F00746255 /* main.m in Sources */,
 				F32D753526AC02DB003B25CB /* Bicycle.m in Sources */,
+				F30179BB26AD93BE003EC6B6 /* Car+Protected.m in Sources */,
+				F30179BE26AD9567003EC6B6 /* Coupe.m in Sources */,
+				F30179B226AD88D5003EC6B6 /* Motorbike.m in Sources */,
 				F3B609D7269330D200746255 /* function.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

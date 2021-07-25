@@ -9,6 +9,9 @@
 #import "Car.h"
 #import "CarModel.h"
 #import "Bicycle.h"
+#import "Motorbike.h"
+#import "Motorbike+Maintenance.h"
+#import "Coupe.h"
 
 #define PI 3.14159
 #define RAD_TO_DEG(radians) (radians * (180.0 / PI))
@@ -269,6 +272,35 @@ int main(int argc, const char * argv[]) {
             [mysteryVehicle signalStop];
             [mysteryVehicle signalLeftTurn];
             [mysteryVehicle signalRightTurn];
+        }
+        
+        // Categories practice
+        // Additional methods from Motorbike+Maintenance.h
+        Motorbike *motorbike = [[Motorbike alloc] init];
+        motorbike.model = @"BMW Motorbike";
+        
+        Motorbike *harley = [[Motorbike alloc] init];
+        harley.model = @"Harley Motorbike";
+        
+        if ([motorbike needsOilChange]) {
+            [motorbike changeOil];
+        }
+        [motorbike rotateTires];
+        [motorbike jumpBatteryUsingMotorbike:harley];
+        
+        Car *porsche = [[Coupe alloc] init];
+        porsche.model = @"Porsche 911 Turbo";
+        [porsche startEngine]; // Calls the protected method
+        [porsche drive];
+                
+        // "Protected" methods have not been imported,
+        // so this will *not* work
+        // [porsche prepareToDrive];
+                
+        SEL protectedMethod = @selector(prepareToDrive);
+        if ([porsche respondsToSelector:protectedMethod]) {
+            // This *will* work
+            [porsche performSelector:protectedMethod];
         }
     }
     return 0;
