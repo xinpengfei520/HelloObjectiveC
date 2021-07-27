@@ -5,19 +5,49 @@ The Objective-C programming language best practice.
 
 ## 1. Introduction
 
+Objective-C 是 Apple 的 iOS 和 OS X 操作系统的本地编程语言。它是一种经过编译的通用语言，能够构建从命令行实用程序到动画 GUI 再到特定领域库的所有内容。它还提供了许多用于维护大型可扩展框架的工具。
 
+Objective-C 旨在为 C 添加面向对象的特性，但这两种语言使用根本不同的哲学实现了这一点。Objective-C 显然更具动态性，将其大部分决策推迟到运行时而不是编译时。这反映在 iOS 和 OS X 开发的许多底层设计模式中。
+
+Objective-C 也以其冗长的命名约定而闻名。生成的代码是如此具有描述性，以至于几乎不可能误解或误用它。例如，以下代码段显示了一个 C++ 方法调用及其 Objective-C 等效项。
+
+Objective-C 方法读起来更像是一种人类语言，而不是计算机语言。一旦习惯了这一点，就很容易在新项目中定位自己并使用第三方代码。
+
+Objective-C 是一种由大量标准库支持的相对简单的语法，Apple 的[Cocoa](http://web.archive.org/web/20160408041342/https://developer.apple.com/technologies/mac/cocoa.html)和[Cocoa Touch](http://web.archive.org/web/20160408041342/https://developer.apple.com/technologies/ios/cocoa-touch.html)框架是迄今为止最受欢迎的。它们分别定义了用于构建 OS X 和 iOS 应用程序的 API。
 
 ## 2. C Basics
 
+指针是对内存地址的直接引用。变量充当值的透明容器，而指针移除了一个抽象层，让您可以看到该值是如何存储的。这需要两个新工具：
 
+- 引用运算符 ( `&`) 返回普通变量的内存地址。这就是创建指针的方式。
+- 解引用运算符 ( `*`) 返回指针内存地址的内容。
+
+下面的示例演示如何声明、创建和取消引用指针。请注意，定义指针看起来与定义普通变量完全一样，只是它前面带有一个星号 ( `*`)。
+
+```objective-c
+int year = 1967;          // Define a normal variable
+int *pointer;             // Declare a pointer that points to an int
+pointer = &year;          // Find the memory address of the variable
+NSLog(@"%d", *pointer);   // Dereference the address to get its value
+*pointer = 1990;          // Assign a new value to the memory address
+NSLog(@"%d", year);       // Access the value via the variable
+```
+
+![img](http://image.x-sir.com/pointers.png)
 
 ## 3. Function
 
-
+函数是任何现代编程语言的基本组成部分之一。它们允许您在整个应用程序中重用任意代码块，这对于组织和维护除最琐碎的代码库之外的所有代码都是必要的。
 
 ## 4. Classes
 
+在类中定义一组可重用的属性和行为。然后，您从该类实例化对象以与这些属性和行为进行交互。
 
+Objective-C 类似于 C++，因为它从类的实现中抽象出类的接口。一个接口声明的公共属性和一个类的方法，以及相应的 实施规定，实际上使这些属性和方法工作的代码。
+
+![img](http://image.x-sir.com/interface-vs-implementation.png)
+
+Objective-C不支持命名空间，这就是为什么可可功能需要像前缀`NS`，`CA`， `AV`，等，以避免命名冲突。这也适用于类。推荐的约定是对特定于应用程序的类使用三个字母的前缀（例如，`XYZCar`）。
 
 ## 5. Properties
 
@@ -322,6 +352,8 @@ NSNumber *twentySeven = [NSNumber numberWithInt:27];
 
 ## Thanks 
 
+### Tutorials:
+
 [http://rypress.com/tutorials/objective-c/index](http://rypress.com/tutorials/objective-c/index)
 
 or
@@ -330,9 +362,22 @@ or
 
 I recommend the [Ry's Objective-C Tutorial] strongly, because it very simple and easy to learn with beginners.
 
+[https://www.tutorialspoint.com/ios/ios_objective_c.htm](https://www.tutorialspoint.com/ios/ios_objective_c.htm)
+
+[Start Developing iOS Apps Today (Retired)](https://developer.apple.com/library/archive/referencelibrary/GettingStarted/RoadMapiOS-Legacy/chapters/Introduction.html)
+
+[Programming with Objective-C](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html#//apple_ref/doc/uid/TP40011210-CH1-SW1)
+
+### Official APIs:
+
 [https://developer.apple.com/library/content/navigation/](https://developer.apple.com/library/content/navigation/)
 
 The new API reference pages：
 
 [https://developer.apple.com/reference](https://developer.apple.com/reference)
 
+
+
+### Apple Developer:
+
+[https://developer.apple.com/](https://developer.apple.com/)
